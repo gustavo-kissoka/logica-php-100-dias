@@ -36,7 +36,7 @@ php-logica-100-dias/
 * Dia 002 ✅
 * Dia 003 ✅
 * Dia 004 ✅
-* Dia 005 ⏳
+* Dia 005 ✅
 * Dia 006 ⏳
 * Dia 007 ⏳
 * Dia 008 ⏳
