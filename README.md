@@ -29,22 +29,6 @@ php-logica-100-dias/
 │
 └── README.md
 ```
-
-## 📈 Progresso
-
-* Dia 001 ✅
-* Dia 002 ✅
-* Dia 003 ✅
-* Dia 004 ✅
-* Dia 005 ✅
-* Dia 006 ✅
-* Dia 007 ⏳
-* Dia 008 ⏳
-* Dia 009 ⏳
-* Dia 010 ⏳
-* ...
-* Dia 100 ⏳
-
 ## 🎯 Objetivos Pessoais
 
 * Melhorar lógica de programação
