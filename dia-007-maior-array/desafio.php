@@ -1,13 +1,14 @@
 <?php
 
 echo "Digite 5 numeros: ";
-$numero = trim(fgets(STDIN));
+$input = trim(fgets(STDIN));
 
-$numeros = explode(" ", $numero);
+$numeros = array_map('int', array_filter(explode(" ", $input)));
 
 $maior = $numeros[0];
 $menor = $numeros[0];
 
+// alternativa max() e o $min()
 foreach ($numeros as $num) {
     if ($num > $maior) {
         $maior = $num;
