@@ -12,7 +12,7 @@ Treinar e aprimorar minha lógica de programação utilizando apenas **PHP puro*
 *  Foco principal em lógica de programação
 *  Cada dia terá sua própria pasta
 *  Código simples e organizado
-*  Em alguns desafios não usar funções prontas, mas sim lógica manual
+*  Em alguns desafios não usar funções prontas(soluções prontas), mas sim lógica.
 
 ## 📂 Estrutura do Repositório
 
