@@ -1,18 +1,14 @@
 <?php
-// 🧠 O que é um anagrama?
+// O que é um anagrama?
 // Duas palavras são anagramas quando:
 // possuem as mesmas letras
 // com a mesma quantidade
 // apenas em ordem diferente
 
-// ❌ Não uses
+// Não usar:
 // sort
 // str_split + sort
 // funções mágicas
-
-// ESTRUTUTRA MENTAL DO DESAFIO CONTAR A PRIMIERA
-// DEPOIS DESCONTAR A SEGUNDA 
-// VERIFICAR SE FICOU TUDO ZERO
 
 echo "digite a primeira palavras: ";
 $palavra1 = trim(fgets(STDIN));
