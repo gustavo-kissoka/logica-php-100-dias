@@ -18,7 +18,7 @@ function produto_array_exceto_ele_mesmo($nums) {
     }
 
     return $resultado;
-    
+    echo "\n";
 }
 
 $valores = [1, 2, 3, 4];

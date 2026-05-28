@@ -1,6 +1,6 @@
-# 🚀 Dia 25 — Produto do Array Exceto Ele Mesmo
+#  Dia 25 — Produto do Array Exceto Ele Mesmo
 
-## 🧠 Descrição
+##  Descrição
 
 Este desafio consiste em retornar um array onde cada posição contém o produto de todos os elementos do array, exceto o elemento atual.
 
@@ -8,7 +8,7 @@ A solução não pode utilizar divisão.
 
 ---
 
-## 📌 Exemplo
+##  Exemplo
 
 ### Entrada
 
@@ -24,7 +24,7 @@ A solução não pode utilizar divisão.
 
 ---
 
-## ⚙️ Lógica Utilizada
+## Lógica Utilizada
 
 O algoritmo utiliza duas passagens:
 
@@ -40,7 +40,7 @@ O resultado final é obtido multiplicando os dois produtos.
 
 ---
 
-## 💡 Conceitos Aplicados
+##  Conceitos Aplicados
 
 * Prefix Product
 * Suffix Product
@@ -51,12 +51,12 @@ O resultado final é obtido multiplicando os dois produtos.
 
 ---
 
-## 🛠️ Tecnologias
+##  Tecnologias
 
 * PHP CLI
 
 ---
 
-## 🎯 Objetivo
+##  Objetivo
 
 Treinar algoritmos eficientes e manipulação acumulativa de arrays.

@@ -1,12 +1,12 @@
-# 🚀 Dia 23 — Encontrar o Segundo Maior Número
+#  Dia 23 — Encontrar o Segundo Maior Número
 
-## 🧠 Descrição
+##  Descrição
 
 Este desafio consiste em encontrar o segundo maior número de um array sem utilizar funções prontas como `sort()` ou `max()`.
 
 ---
 
-## 📌 Exemplo
+##  Exemplo
 
 ### Entrada
 
@@ -22,7 +22,7 @@ Este desafio consiste em encontrar o segundo maior número de um array sem utili
 
 ---
 
-## ⚙️ Lógica Utilizada
+##  Lógica Utilizada
 
 O algoritmo percorre o array apenas uma vez.
 
@@ -38,7 +38,7 @@ Quando um número maior é encontrado:
 
 ---
 
-## 💡 Conceitos Aplicados
+##  Conceitos Aplicados
 
 * Arrays
 * Loops
@@ -48,12 +48,12 @@ Quando um número maior é encontrado:
 
 ---
 
-## 🛠️ Tecnologias
+##  Tecnologias
 
 * PHP CLI
 
 ---
 
-## 🎯 Objetivo
+##  Objetivo
 
 Treinar lógica de comparação e atualização dinâmica de variáveis.
