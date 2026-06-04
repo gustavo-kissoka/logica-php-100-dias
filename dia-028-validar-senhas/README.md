@@ -31,4 +31,19 @@ Muito curta.
 
 * Usei expressões regulares (regex) preg_match
 * em vez de usar blocos de if/else usei um padrão chamado "guard clauses", focando no erro e na facilidade de leitura.
+
+# Melhoria não implementada
+Para guradar todos os erros.
+```php
+$erros = [];
+
+if (!$tamanhoMinimo) {
+    $erros[] = "A senha deve ter pelo menos 8 caracteres.";
+}
+
+if (!$maiusculas) {
+    $erros[] = "A senha deve conter pelo menos uma letra maiúscula.";
+}
+```
+
   
