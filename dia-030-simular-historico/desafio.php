@@ -15,7 +15,7 @@ function adicionar(&$historico, &$redo, $novoTexto, &$textoAtual)
 function desfazer(&$historico, &$redo, &$textoAtual)
 {
     // se não houver nada no histórico, não faz nada
-    if (count($historico) === 0) return;
+    if (empty($historico)) return;
 
     // adicionar o texto atual ao redo
     $redo[] = $textoAtual;
@@ -23,10 +23,11 @@ function desfazer(&$historico, &$redo, &$textoAtual)
     $textoAtual = array_pop($historico);
 }
 
+// redo ctrl + y
 function refazer(&$historico, &$redo, &$textoAtual)
 {
     // se nao houver nada no redo, nao faz nada
-    if (count($redo) === 0) return;
+    if (empty($redo)) return;
 
     $historico[] = $textoAtual;
 
@@ -51,6 +52,5 @@ echo "Texto atual:" . $textoAtual . "\n";
 // ctrl + y
 refazer($historico, $redo, $textoAtual);
 echo "Texto atual:" . $textoAtual . "\n";
-
 
 ?>
