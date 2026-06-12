@@ -87,7 +87,7 @@ Teclado
 
 ---
 
-## 🎯 Objetivo do Desafio
+##  Objetivo do Desafio
 
 Aprender a ordenar estruturas de dados mais próximas de cenários reais, onde normalmente trabalha-se com registros compostos por vários atributos, como produtos, usuários, pedidos e clientes.
 
