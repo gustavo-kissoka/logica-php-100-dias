@@ -6,7 +6,7 @@ Treinar e aprimorar minha lógica de programação utilizando apenas **PHP puro*
 
 ##  Regras do Desafio
 
-*  1 desafio por dia
+*  1 desafio por dia menos domingo.
 *  Utilizar apenas PHP
 *  Sem frameworks
 *  Foco principal em lógica de programação
