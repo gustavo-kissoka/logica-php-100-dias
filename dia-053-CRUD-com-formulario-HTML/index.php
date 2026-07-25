@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </tr>
       </thead>
       <tbody>
-        <!-- Linha 1 -->
+       
         <?php foreach ($bibliotecaBD as $livro) : ?>
           <tr>
             <!-- O htmlspecialchars para segurança contra o XSS -->
@@ -143,14 +143,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </table>
   </main>
 
-  <!-- ================= MODAL ADICIONAR ================= -->
+  <!--MODAL ADICIONAR -->
   <div class="modal-overlay" id="modal-add">
     <div class="modal-container">
       <div class="modal-header">
         <h2>Adicionar Novo Livro</h2>
         <button class="close-modal">&times;</button>
       </div>
-      <!-- Form pronto para o seu PHP -->
+      
       <form action="index.php" method="POST">
         <div class="modal-body">
           <div class="form-group">
@@ -191,14 +191,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
 
-  <!-- ================= MODAL EDITAR ================= -->
+  <!--MODAL EDITAR -->
   <div class="modal-overlay" id="modal-edit">
     <div class="modal-container">
       <div class="modal-header">
         <h2>Editar Livro</h2>
         <button class="close-modal">&times;</button>
       </div>
-      <!-- Form pronto para o seu PHP -->
+    
       <form action="index.php" method="POST">
         <div class="modal-body">
           <!-- Campo escondido para guardar o ID do registro -->

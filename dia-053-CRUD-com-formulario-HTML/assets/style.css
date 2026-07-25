@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 
-/* --- ESTILOS BASE E TABELA (DO TEMPLATE ANTERIOR) --- */
+/* --- ESTILOS BASE E TABELA --- */
 :root {
   --bg-color: #f4f7f6;
   --primary-color: #0a364b;
@@ -164,7 +164,7 @@ tbody td.id-col {
   fill: currentColor;
 }
 
-/* --- ESTILOS DOS MODAIS (NOVO) --- */
+/* modal  */
 .modal-overlay {
   position: fixed;
   top: 0;

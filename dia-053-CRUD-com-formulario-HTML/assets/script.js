@@ -2,7 +2,7 @@
         const modalAdd = document.getElementById('modal-add');
         const modalEdit = document.getElementById('modal-edit');
 
-        // Botão para ABRIR Modal Adicionar
+        // botão para abrir o Modal Adicionar
         document.getElementById('btn-open-add').addEventListener('click', () => {
             modalAdd.classList.add('active');
         });
@@ -36,7 +36,7 @@
             });
         });
 
-        // Opcional: Fechar o modal se o usuário clicar fora do quadro branco (no fundo escuro)
+        // Lógica para Fechar o modal se o usuário clicar fora do quadro branco (no fundo escuro)
         window.addEventListener('click', (e) => {
             if (e.target === modalAdd) modalAdd.classList.remove('active');
             if (e.target === modalEdit) modalEdit.classList.remove('active');
