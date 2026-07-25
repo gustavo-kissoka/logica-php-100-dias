@@ -20,13 +20,13 @@ Treinar e aprimorar minha lógica de programação utilizando apenas **PHP puro*
 ```
 php-logica-100-dias/
 │
-├── dia-001/
+├── dia-001-nome-do-projeto/
 │   └── desafio.php
 │
-├── dia-002/
+├── dia-002-nome-do-projeto/
 │   └── desafio.php
 │
-├── dia-003/
+├── dia-003-nome-do-projeto/
 │   └── desafio.php
 │
 └── README.md
