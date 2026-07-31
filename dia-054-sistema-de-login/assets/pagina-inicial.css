@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  font-family: "Feather Bold", "Nunito", "DIN Round", "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: 20px;
+}

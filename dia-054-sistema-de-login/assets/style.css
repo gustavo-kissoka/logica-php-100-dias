@@ -1,0 +1,439 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Cores estilo Duolingo */
+  --primary: #58cc02;
+  --primary-dark: #46a302;
+  --secondary: #1cb0f6;
+  --secondary-dark: #1899d6;
+  
+  --bg: #f7f9fa;
+  --surface: #ffffff;
+  --text: #4b4b4b;
+  --text-muted: #afafaf;
+  
+  --input-bg: #f7f7f7;
+  --border-color: #e5e5e5;
+  --border-active: #84d8ff;
+  --border-dark: #cdcdcd;
+
+  --danger: #ff4b4b;
+  --danger-dark: #ea2b2b;
+
+  --accent: #1cb0f6;
+  
+  --easing-panel: cubic-bezier(0.65, 0, 0.35, 1);
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 0.6s;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  font-family: "Feather Bold", "Nunito", "DIN Round", "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Card Principal  */
+.card {
+  position: relative;
+  overflow: hidden;
+  width: 680px;
+  height: 460px;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 2px solid var(--border-color);
+  box-shadow: 0 12px 0 var(--border-color); /* Sombra 3D sólida */
+}
+
+.toggle {
+  display: none;
+}
+
+/* Painel Deslizante  */
+.card-bg {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  background: var(--primary);
+  border-right: 2px solid var(--primary-dark);
+  translate: 0 0;
+  transition: translate var(--duration) var(--easing-panel), background-color var(--duration);
+  will-change: transform;
+}
+
+.toggle:checked ~ .card-bg {
+  translate: 100% 0;
+  background: var(--secondary);
+  border-left: 2px solid var(--secondary-dark);
+  border-right: none;
+}
+
+.hero,
+.form {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--duration) var(--easing-panel),
+    visibility var(--duration) var(--easing-panel),
+    translate var(--duration) var(--easing-panel);
+}
+
+
+
+.hero.signup {
+  opacity: 1;
+  visibility: visible;
+  translate: 0;
+}
+
+.hero.signin {
+  left: 50%;
+  translate: 25% 0;
+}
+
+.form.signup {
+  left: 50%;
+  opacity: 1;
+  visibility: visible;
+  translate: 0;
+}
+
+.form.signin {
+  translate: 50% 0;
+}
+
+.toggle:checked ~ .hero.signup {
+  opacity: 0;
+  visibility: hidden;
+  translate: -25% 0;
+}
+
+.toggle:checked ~ .hero.signin {
+  opacity: 1;
+  visibility: visible;
+  translate: 0;
+}
+
+.toggle:checked ~ .form.signup {
+  opacity: 0;
+  visibility: hidden;
+  translate: -50% 0;
+}
+
+.toggle:checked ~ .form.signin {
+  opacity: 1;
+  visibility: visible;
+  translate: 0;
+}
+
+
+.hero {
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 50%;
+  color: #ffffff;
+  text-align: center;
+  padding: 0 32px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.hero p {
+  margin: 0 0 10px;
+  opacity: 0.95;
+  line-height: 1.5;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Botão do Hero (Estilo Bloco 3D Transparente/Branco) */
+.hero label {
+  padding: 12px 32px;
+  border-radius: 16px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.1s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.hero label:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--text);
+  box-shadow: 0 4px 0 #e5e5e5;
+}
+
+.hero label:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 transparent;
+}
+
+/* --- Estilos do Formulário --- */
+
+.form {
+  background: var(--surface);
+  z-index: 1;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 36px;
+}
+
+.form h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  text-align: center;
+}
+
+.sso {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sso a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 2px solid var(--border-color);
+  background: var(--surface);
+  box-shadow: 0 4px 0 var(--border-color);
+  font-size: 18px;
+  color: var(--text-muted);
+  transition: all 0.1s ease;
+  text-decoration: none;
+}
+
+.sso a:hover {
+  border-color: #cdcdcd;
+  color: var(--text);
+}
+
+.sso a:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 transparent;
+}
+
+.form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.form form > a {
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 4px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.form form > a:hover {
+  color: var(--secondary-dark);
+}
+
+.form p {
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Inputs em Formato "Tile/Bloco" */
+.form input {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 16px;
+  border: 2px solid var(--border-color);
+  background: var(--input-bg);
+  padding: 13px 16px;
+  color: var(--text);
+  width: 100%;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form input::placeholder {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.form input:focus {
+  border-color: var(--border-active);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(28, 176, 246, 0.15);
+}
+
+/* Botão Principal de Submit */
+.form button {
+  border: none;
+  padding: 13px 0;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  width: 100%;
+  margin-top: 8px;
+  background: var(--primary);
+  border-bottom: 4px solid var(--primary-dark);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+/* Alterna cor do botão de acordo com a aba (Signin/Signup) usando checked*/
+.toggle:checked ~ .form.signin button {
+  background: var(--secondary);
+  border-bottom: 4px solid var(--secondary-dark);
+}
+
+.form button:hover {
+  filter: brightness(1.05);
+}
+
+.form button:active {
+  transform: translateY(4px);
+  border-bottom-width: 0px;
+  margin-bottom: 4px;
+  box-shadow: none;
+}
+
+/*aqui começa o da pagina-inicial*/
+/* Card Principal */
+.welcome-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--surface);
+  border: 2px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 10px 0 var(--border-color);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+/* Avatar de Usuário */
+.user-avatar {
+  width: 80px;
+  height: 80px;
+  background: #ddf4ff;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-avatar svg {
+  width: 45px;
+  height: 45px;
+  fill: var(--accent);
+}
+
+/* Textos */
+.welcome-text h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.welcome-text p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* Formulário e Botão de Logout */
+.logout-form {
+  width: 100%;
+}
+
+.btn-logout {
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: var(--danger);
+  border: none;
+  border-bottom: 4px solid var(--danger-dark);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.1s ease;
+}
+
+.btn-logout svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+}
+
+.btn-logout:hover {
+  filter: brightness(1.05);
+}
+
+/* Efeito  de clique do Duolingo */
+.btn-logout:active {
+  transform: translateY(4px);
+  border-bottom-width: 0px;
+  margin-bottom: 4px;
+}
