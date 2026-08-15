@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 function adicionarContacto($pdo, $nome, $telefone, $email, $foto)
 {
     $sql = "INSERT INTO contactos (nome, telefone, email, foto) VALUES (:nome, :telefone, :email, :foto)";
@@ -40,11 +40,16 @@ function processarUploadFoto($file)
 function listarContacto($pdo, $busca = '')
 {
     if (!empty($busca)) {
-        $sql = "SELECT * FROM contactos WHERE nome LIKE :busca OR telefone LIKE :busca OR email LIKE :busca ORDER BY id DESC";
+        $sql = "SELECT * FROM contactos WHERE nome LIKE :busca1 OR telefone LIKE :busca2 OR email LIKE :busca3 ORDER BY id DESC";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([':busca' => '%' . $busca . '%']);
+        $termoBusca = '%' . $busca . '%';
+        $stmt->execute([
+            ':busca1' => $termoBusca,
+            ':busca2' => $termoBusca,
+            ':busca3' => $termoBusca
+        ]);
     } else {
-        $sql = "SELECT * FROM contatos ORDER BY id DESC";
+        $sql = "SELECT * FROM contactos ORDER BY id DESC";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
     }
