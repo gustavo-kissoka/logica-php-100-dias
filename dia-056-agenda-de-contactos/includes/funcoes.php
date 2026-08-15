@@ -76,9 +76,9 @@ function editarContacto($pdo, $nome, $telefone, $email, $foto, $id)
             ':email' => $email,
             ':id' => $id
         ];
-        $stmt = $pdo->prepare($sql);
-        return $stmt->execute($params);
     }
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute($params);
 }
 
 function removerContacto($pdo, $id)
