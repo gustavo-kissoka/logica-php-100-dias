@@ -1,4 +1,5 @@
 <?php
+
 function conectarBD() {
     $host = 'localhost';
     $db = 'sistema_escolar';
@@ -15,8 +16,9 @@ function conectarBD() {
         ]);
 
         return $pdo;
-    }catch (PDOException $e) {
+
+}catch (PDOException $e) {
         die("Erro de Conexão com a base" . $e->getMessage());
     }
 }
-?>
+?> 
