@@ -3,6 +3,8 @@ require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/include/funcoes.php';
 
 $pdo = conectarBD();
+
+$alunos = listarAlunosComNotas($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -76,39 +78,49 @@ $pdo = conectarBD();
             </tr>
           </thead>
           <tbody>
+            <?php if (!empty($alunos)): ?>
+              <?php foreach ($alunos as $aluno): ?>
+                <?php
+                $classeStatus = (strtolower($aluno['situacao']) == 'aprovado') ? 'aprovado' : 'reprovado';
+                ?>
+                <tr>
+                  <td><strong><?= htmlspecialchars($aluno['nome']) ?></strong></td>
+                  <td><?= htmlspecialchars($aluno['turma']) ?></td>
+                  <td><?= htmlspecialchars($aluno['disciplina']) ?></td>
+                  <td><strong><?= number_format($aluno['media'], 1, '.', '') ?></strong></td>
+                  <td><span class="badge-status <?= $classeStatus ?>"><?= htmlspecialchars($aluno['situacao']) ?></span></td>
+                  <td>
+                    <div class="actions-cell">
+                      <!-- Editar Aluno e Nota -->
+                      <button class="btn-action edit btn-open-edit"
+                        data-id="<?= $aluno['aluno_id'] ?>"
+                        data-nome="<?= htmlspecialchars($aluno['nome']) ?>"
+                        data-turma="<?= htmlspecialchars($aluno['turma']) ?>"
+                        data-disciplina="<?= htmlspecialchars($aluno['disciplina']) ?>"
+                        data-nota1="<?= $aluno['nota1'] ?>"
+                        data-nota2="<?= $aluno['nota2'] ?>"
+                        data-media="<?= $aluno['media'] ?>"
+                        title="Editar">
+                        <svg viewBox="0 0 24 24">
+                          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                        </svg>
+                      </button>
 
-            <tr>
-              <td><strong>Carlos Alberto</strong></td>
-              <td>Turma A (10ª)</td>
-              <td>Matemática</td>
-              <td><strong>15.0</strong></td>
-              <td><span class="badge-status aprovado">Aprovado</span></td>
-              <td>
-                <div class="actions-cell">
-                  <!-- Editar Aluno e Nota -->
-                  <button class="btn-action edit btn-open-edit"
-                    data-id="1"
-                    data-nome="Carlos Alberto"
-                    data-turma="Turma A (10ª)"
-                    data-disciplina="Matemática"
-                    data-nota1="10.0"
-                    data-nota2="15.0"
-                    data-media="15.0"
-                    title="Editar">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-                    </svg>
-                  </button>
 
-
-                  <a href="deletar.php?id=1" onclick="return confirm('Remover registo?')" class="btn-action delete" title="Remover">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-                    </svg>
-                  </a>
-                </div>
-              </td>
-            </tr>
+                      <a href="deletar.php?id=<?= $aluno['aluno_id'] ?>" onclick="return confirm('Remover registo?')" class="btn-action delete" title="Remover">
+                        <svg viewBox="0 0 24 24">
+                          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                        </svg>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="6" style="text-align: center;">Nenhum aluno encontrado.</td>
+              </tr>
+            <?php endif; ?>
           </tbody>
         </table>
       </div>
