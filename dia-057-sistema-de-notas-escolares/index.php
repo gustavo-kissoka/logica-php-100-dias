@@ -3,8 +3,65 @@ require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/include/funcoes.php';
 
 $pdo = conectarBD();
+$stats = estatisticasDashboard($pdo);
 
 $alunos = listarAlunosComNotas($pdo);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
+
+
+  if ($_POST['acao'] === 'create') {
+    $nome  = trim($_POST['nome'] ?? '');
+    $turma = trim($_POST['turma'] ?? '');
+    $disciplina = trim($_POST['disciplina'] ?? '');
+    $nota1 = floatval($_POST['nota1'] ?? 0);
+    $nota2 = floatval($_POST['nota2'] ?? 0);
+
+
+    if (!empty($nome) && !empty($turma) && !empty($disciplina)) {
+      cadastrarAlunoComNota($pdo, $nome, $turma, $disciplina, $nota1, $nota2);
+
+      // Redireciona para evitar reenvio do formulário ao fazer refresh (F5)
+      header('Location: index.php');
+      exit;
+    }
+  }
+
+
+  if ($_POST['acao'] === 'edit') {
+    $aluno_id   = intval($_POST['id'] ?? 0);
+    $nome       = trim($_POST['nome'] ?? '');
+    $turma      = trim($_POST['turma'] ?? '');
+    $disciplina = trim($_POST['disciplina'] ?? '');
+    $nota1      = floatval($_POST['nota1'] ?? 0);
+    $nota2      = floatval($_POST['nota2'] ?? 0);
+
+
+    if ($aluno_id > 0 && !empty($nome) && !empty($turma) && !empty($disciplina)) {
+      editarAlunoComNota($pdo, $aluno_id, $nome, $turma, $disciplina, $nota1, $nota2);
+
+      // Redireciona para atualizar a página e evitar reenvio com F5
+      header('Location: index.php');
+      exit;
+    }
+  }
+}
+
+if (isset($_GET['acao']) && $_GET['acao'] === 'delete' && isset($_GET['id'])) {
+  $aluno_id = intval($_GET['id']);
+
+  if ($aluno_id > 0) {
+    deletarAluno($pdo, $aluno_id);
+  }
+
+  // Redireciona para limpar os parâmetros da URL
+  header('Location: index.php');
+  exit;
+}
+
+$pesquisa = trim($_GET['pesquisa'] ?? '');
+$alunos = listarAlunosComNotas($pdo, $pesquisa);
+
 ?>
 
 <!DOCTYPE html>
@@ -32,19 +89,19 @@ $alunos = listarAlunosComNotas($pdo);
     <section class="dashboard-grid">
       <div class="card-stat alunos">
         <span>Alunos</span>
-        <h2>28</h2>
+        <h2><?= $stats['total_alunos'] ?></h2>
       </div>
       <div class="card-stat aprovados">
         <span>Aprovados</span>
-        <h2>20</h2>
+        <h2><?= $stats['total_aprovados'] ?></h2>
       </div>
       <div class="card-stat reprovados">
         <span>Reprovados</span>
-        <h2>8</h2>
+        <h2><?= $stats['total_reprovados'] ?></h2>
       </div>
       <div class="card-stat media">
         <span>Média Geral</span>
-        <h2>13.7</h2>
+        <h2><?= number_format($stats['media_geral'], 1, '.', '') ?></h2>
       </div>
     </section>
 
@@ -59,7 +116,7 @@ $alunos = listarAlunosComNotas($pdo);
             <svg class="search-icon" viewBox="0 0 24 24">
               <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
             </svg>
-            <input type="text" name="pesquisa" placeholder="Pesquisar aluno...">
+            <input type="text" name="pesquisa" placeholder="Pesquisar aluno..." value="<?= htmlspecialchars($pesquisa) ?>">
           </form>
         </div>
       </div>
@@ -107,7 +164,7 @@ $alunos = listarAlunosComNotas($pdo);
                       </button>
 
 
-                      <a href="deletar.php?id=<?= $aluno['aluno_id'] ?>" onclick="return confirm('Remover registo?')" class="btn-action delete" title="Remover">
+                      <a href="index.php?acao=delete&id=<?= $aluno['aluno_id'] ?>" onclick="return confirm('Remover registo?')" class="btn-action delete" title="Remover">
                         <svg viewBox="0 0 24 24">
                           <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
                         </svg>
@@ -135,7 +192,8 @@ $alunos = listarAlunosComNotas($pdo);
         <button class="close-btn close-modal">&times;</button>
       </div>
 
-      <form action="cadastrar.php" method="POST">
+      <form action="index.php" method="POST">
+        <input type="hidden" name="acao" value="create" />
         <div class="form-group">
           <label>Nome do Aluno</label>
           <input type="text" name="nome" required placeholder="Ex: João Manuel">
@@ -183,8 +241,9 @@ $alunos = listarAlunosComNotas($pdo);
         <button class="close-btn close-modal">&times;</button>
       </div>
 
-      <form action="editar.php" method="POST">
+      <form action="index.php" method="POST">
         <input type="hidden" id="edit-id" name="id">
+        <input type="hidden" name="acao" value="edit">
 
         <div class="form-group">
           <label>Nome do Aluno</label>

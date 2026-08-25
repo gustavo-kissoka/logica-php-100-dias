@@ -10,7 +10,7 @@ function cadastrarAlunoComNota($pdo, $nome, $turma, $disciplina, $nota1, $nota2)
 
 
         $media = ($nota1 + $nota2) / 2;
-        $situacao = ($media >= 20) ? 'Aprovado' : 'Reprovado'; // Ajusta a nota de corte se necessário
+        $situacao = ($media >= 10) ? 'Aprovado' : 'Reprovado'; // Ajusta a nota de corte se necessário
 
 
         $sqlAluno = "INSERT INTO alunos (nome, turma, criado) VALUES (:nome, :turma, NOW())";
@@ -54,7 +54,7 @@ function editarAlunoComNota($pdo, $aluno_id, $nome, $turma, $disciplina, $nota1,
 
 
         $media = ($nota1 + $nota2) / 2;
-        $situacao = ($media >= 20) ? 'Aprovado' : 'Reprovado';
+        $situacao = ($media >= 10) ? 'Aprovado' : 'Reprovado';
 
 
         $sqlAluno = "UPDATE alunos SET nome = :nome, turma = :turma WHERE aluno_id = :aluno_id";
@@ -87,10 +87,9 @@ function editarAlunoComNota($pdo, $aluno_id, $nome, $turma, $disciplina, $nota1,
     }
 }
 
-function listarAlunosComNotas($pdo)
+function listarAlunosComNotas($pdo, $termo = '')
 {
     try {
-
         $sql = "SELECT 
                     alunos.aluno_id,
                     alunos.nome,
@@ -101,10 +100,22 @@ function listarAlunosComNotas($pdo)
                     notas.media,
                     notas.situacao
                 FROM alunos
-                INNER JOIN notas ON alunos.aluno_id = notas.aluno_id
-                ORDER BY alunos.nome ASC";
+                INNER JOIN notas ON alunos.aluno_id = notas.aluno_id";
 
-        $stmt = $pdo->query($sql);
+
+        if (!empty($termo)) {
+            $sql .= " WHERE alunos.nome LIKE :termo";
+        }
+
+        $sql .= " ORDER BY alunos.nome ASC";
+
+        $stmt = $pdo->prepare($sql);
+
+        if (!empty($termo)) {
+            $stmt->execute([':termo' => '%' . $termo . '%']);
+        } else {
+            $stmt->execute();
+        }
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -125,4 +136,35 @@ function deletarAluno($pdo, $aluno_id)
     }
 }
 
-?>
+function   estatisticasDashboard($pdo)
+{
+    try {
+        $stats = [];
+
+        // total de alunos
+        $stmt = $pdo->query("SELECT COUNT(*) FROM alunos");
+        $stats['total_alunos'] = $stmt->fetchColumn();
+
+        // total de aprovados
+        $stmt = $pdo->query("SELECT COUNT(*) FROM notas WHERE situacao = 'Aprovado'");
+        $stats['total_aprovados'] = $stmt->fetchColumn();
+
+        // total de reprovados
+        $stmt = $pdo->query("SELECT COUNT(*) FROM notas WHERE situacao = 'Reprovado'");
+        $stats['total_reprovados'] = $stmt->fetchColumn();
+
+        //média geral 
+        $stmt = $pdo->query("SELECT AVG(media) FROM notas");
+        $mediaGeral = $stmt->fetchColumn();
+        $stats['media_geral'] = $mediaGeral ? round($mediaGeral, 1) : 0;
+
+        return $stats;
+    } catch (PDOException $e) {
+        return [
+            'total_alunos' => 0,
+            'total_aprovados' => 0,
+            'total_reprovados' => 0,
+            'media_geral' => 0
+        ];
+    }
+}
