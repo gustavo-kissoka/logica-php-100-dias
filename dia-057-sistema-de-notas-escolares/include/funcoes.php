@@ -10,7 +10,7 @@ function cadastrarAlunoComNota($pdo, $nome, $turma, $disciplina, $nota1, $nota2)
 
 
         $media = ($nota1 + $nota2) / 2;
-        $situacao = ($media >= 10) ? 'Aprovado' : 'Reprovado'; // Ajusta a nota de corte se necessário
+        $situacao = ($media >= 10 && $media <= 20) ? 'Aprovado' : 'Reprovado'; // Ajusta a nota de corte se necessário
 
 
         $sqlAluno = "INSERT INTO alunos (nome, turma, criado) VALUES (:nome, :turma, NOW())";
@@ -54,7 +54,7 @@ function editarAlunoComNota($pdo, $aluno_id, $nome, $turma, $disciplina, $nota1,
 
 
         $media = ($nota1 + $nota2) / 2;
-        $situacao = ($media >= 10) ? 'Aprovado' : 'Reprovado';
+        $situacao = ($media >= 10 && $media <= 20) ? 'Aprovado' : 'Reprovado';
 
 
         $sqlAluno = "UPDATE alunos SET nome = :nome, turma = :turma WHERE aluno_id = :aluno_id";
