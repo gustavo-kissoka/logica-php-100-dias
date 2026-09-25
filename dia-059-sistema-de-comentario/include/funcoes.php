@@ -40,6 +40,26 @@ function adicionarComentarios($pdo, $nome, $comentario)
         ':comentario' => $comentario
     ]);
 }
+
+function editarComentario($pdo, $id, $comentario)
+{
+
+    $id = intval($id);
+    $comentario = trim($comentario);
+
+    if ($id <= 0 || empty($comentario)) {
+        return false;
+    }
+
+    $sql = "UPDATE comentarios SET comentario = :comentario WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([
+        ':comentario' => $comentario,
+        ':id' => $id
+    ]);
+}
+
+// funções auxiliares
 // função para formatar o tempo ex.: 3 minutos atrás
 function tempo($data)
 {
