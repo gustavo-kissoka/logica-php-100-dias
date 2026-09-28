@@ -41,8 +41,7 @@ function adicionarComentarios($pdo, $nome, $comentario)
     ]);
 }
 
-function editarComentario($pdo, $id, $comentario)
-{
+function editarComentario($pdo, $id, $comentario) {
 
     $id = intval($id);
     $comentario = trim($comentario);
@@ -55,6 +54,21 @@ function editarComentario($pdo, $id, $comentario)
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([
         ':comentario' => $comentario,
+        ':id' => $id
+    ]);
+
+}
+
+function excluirComentario($pdo, $id) {
+    $id = intval($id);
+
+    if ($id <= 0) {
+        return false;
+    }
+
+    $sql = "DELETE FROM comentarios WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([
         ':id' => $id
     ]);
 }
