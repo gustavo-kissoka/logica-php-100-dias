@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Sistema Cartoon</title>
+    <!-- Importa o CSS Global da pasta assets -->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <main class="auth-wrapper">
+
+      <div class="card-cartoon" style="max-width: 400px">
+        <div class="text-center">
+          <h1 class="title-main">Entrar ⚡</h1>
+          <p class="subtitle">Acede à tua área de utilizador.</p>
+        </div>
+
+        <!--  futura integração com PHP -->
+        <form action="login.php" method="POST">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="nome@email.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-cartoon mt-4">Fazer Login</button>
+        </form>
+
+        <div class="text-center mt-4">
+          <p>
+            Ainda não tens conta?
+            <a href="registro.html" class="text-link">Regista-te aqui</a>
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
