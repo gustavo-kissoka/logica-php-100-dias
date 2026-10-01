@@ -1,0 +1,173 @@
+/* CSS GLOBAL
+   assets/css/style.css
+   SISTEMA DE UTILIZADORES - ESTILO NEOBRUTALISMO / CARTOON
+  */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+
+
+:root {
+    /* Cores Base */
+    --bg-color: #f4f0ea;
+    /* Cor de papel reciclado muito clara */
+    --card-bg: #ffffff;
+    --text-main: #111111;
+    --text-muted: #555555;
+
+    /* Cores de Ação */
+    --primary: #ff5e5b;
+    --secondary: #ffed66;
+    --accent: #00cecb; 
+    --success: #06d6a0;
+  
+
+    /* Bordas e Sombras (O segredo do estilo Cartoon) */
+    --border-thick: 3px solid var(--text-main);
+    --shadow-solid: 6px 6px 0px var(--text-main);
+    --shadow-small: 4px 4px 0px var(--text-main);
+}
+
+/* RESET  */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(#ccc 1px, transparent 1px);
+    background-size: 20px 20px;
+    /* Padrão de pontinhos */
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 4. LAYOUTS ESPECÍFICOS (AUTENTICAÇÃO) */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+}
+
+/* 5. COMPONENTES REUTILIZÁVEIS */
+
+/* Cartão Base */
+.card-cartoon {
+    background-color: var(--card-bg);
+    border: var(--border-thick);
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    box-shadow: var(--shadow-solid);
+}
+
+/* Tipografia */
+.text-center {
+    text-align: center;
+}
+
+.title-main {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 15px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.text-link {
+    color: var(--text-main);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    transition: color 0.2s;
+}
+
+.text-link:hover {
+    color: var(--primary);
+}
+
+/* Formulários */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.form-input {
+    padding: 14px;
+    border: var(--border-thick);
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.2s;
+    background-color: #fff;
+    width: 100%;
+}
+
+.form-input:focus {
+    background-color: #e6fcfb;
+    /* Fundo ciano claro */
+    box-shadow: 3px 3px 0px var(--accent);
+    transform: translate(-2px, -2px);
+}
+
+/* Botões */
+.btn-cartoon {
+    display: inline-block;
+    width: 100%;
+    padding: 16px;
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    border: var(--border-thick);
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: var(--shadow-solid);
+    transition: all 0.1s ease-in-out;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-cartoon.btn-accent {
+    background-color: var(--accent);
+    color: var(--text-main);
+}
+
+.btn-cartoon.btn-success {
+    background-color: var(--success);
+    color: var(--text-main);
+}
+
+/* Efeito Tátil ao Pressionar */
+.btn-cartoon:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0px 0px 0px var(--text-main);
+}
+
+/* Utilitários */
+.mt-4 {
+    margin-top: 20px;
+}
